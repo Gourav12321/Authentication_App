@@ -15,7 +15,7 @@ const handleSubmit= async (e)=>{
     try {
       setloading(true);
       seterror1(false);
-      const response = await axios.post('/auth/signup', formdata);
+      const response = await axios.post('/api/auth/signup', formdata);
       console.log('Signup successful:', response.data);
       // const data = await res.json();
       setloading(false);
