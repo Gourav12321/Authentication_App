@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link,  useNavigate} from 'react-router-dom';
+import { signInFaliure,signInSuccess,signInStart } from '../Redux/slice/user.slice';
+import {useDispatch, useSelector} from 'react-redux';
+
+
 function Signin() {
   const [formdata, setFormdata] = useState({});
-  const [error1, setError1] = useState(false);
-  const [loading, setLoading] = useState(false);
-
+  const {loading , error} = useSelector((state)=> state.user);
+  const navigate = useNavigate();
+ console.log(loading , error);
+const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.id]: e.target.value });
   };
@@ -13,19 +18,20 @@ function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      setError1(false);
-      const response = await axios.post('/api/auth/signin', formdata);
-      console.log('Signin successful:', response.data);
-      setLoading(false);
-      if (response.data.success === false) {
-        setError1(true);
-        return;
+      dispatch(signInStart());
+      const res = await axios.post('/api/auth/signin', formdata);
+      // const data = await res.json();
+      // console.log('Signin successful:', res.data);
+      
+      if (res.success === false) {
+        dispatch(signInFaliure(res));
+        console.log(res);
+        return; 
       }
+      dispatch(signInSuccess(res));
+      navigate('/');
     } catch (error) {
-      console.error('There was an error signing in:', error);
-      setError1(true);
-      setLoading(false);
+      dispatch(signInFaliure(error));
     }
   };
 
@@ -47,7 +53,7 @@ function Signin() {
           <span className='text-blue-500'>Sign up </span>
         </Link>
       </div>
-      <p className='text-red-700 mt-5'> {error1 && "Something Went Wrong"}</p>
+      <p className='text-red-700 mt-5'> {error ? error.message || "Something Went Wrong" : ""}</p>
       
     </div>
   );
