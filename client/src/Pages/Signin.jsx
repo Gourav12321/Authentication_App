@@ -20,8 +20,6 @@ const dispatch = useDispatch();
     try {
       dispatch(signInStart());
       const res = await axios.post('/api/auth/signin', formdata);
-      // const data = await res.json();
-      // console.log('Signin successful:', res.data);
       
       if (res.success === false) {
         dispatch(signInFaliure(res));
