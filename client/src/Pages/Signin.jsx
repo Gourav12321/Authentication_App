@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link,  useNavigate} from 'react-router-dom';
 import { signInFaliure,signInSuccess,signInStart } from '../Redux/slice/user.slice';
 import {useDispatch, useSelector} from 'react-redux';
+import OAuth from '../Component/OAuth';
 
 
 function Signin() {
@@ -44,6 +45,7 @@ const dispatch = useDispatch();
         <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
           {loading ? "Loading" : "Sign In"}
         </button>
+        <OAuth/>
       </form>
       <div className='flex gap-2 px-2 py-5'>
         <p>Don't Have an account?</p>
