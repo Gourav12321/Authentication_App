@@ -9,6 +9,10 @@ import { app } from "../Firebase.js";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import {
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  signOut,
   updateUserFailure,
   updateUserStart,
   updateUserSuccess,
@@ -76,6 +80,27 @@ function Profile() {
     );
   };
 
+  const handleDelete = async () =>{
+    try{
+      dispatch(deleteUserStart());
+      const res = await axios.delete(`/api/user/delete/${currentUser._id}`);
+      if(res.success === false){
+        dispatch(deleteUserFailure(res));
+        return;
+      }
+      dispatch(deleteUserSuccess(res));
+    }catch(error){
+      dispatch(deleteUserFailure(error));
+    }
+  };
+  const handlesignout =async()=>{
+    try{
+      await fetch('/api/auth/signout');
+      dispatch(signOut());
+    }catch(error){
+      console.log(error);
+    }
+  }
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -135,8 +160,8 @@ function Profile() {
         </button>
       </form>
       <div className="flex justify-between mt-5">
-        <span className="text-red-700 cursor-pointer">Delete Account</span>
-        <span className="text-red-700 cursor-pointer">Sign Out</span>
+        <span className="text-red-700 cursor-pointer" onClick={handleDelete}>Delete Account</span>
+        <span className="text-red-700 cursor-pointer" onClick={handlesignout}>Sign Out</span>
       </div>
     </div>
   );
