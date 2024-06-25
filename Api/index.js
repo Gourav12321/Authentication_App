@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import userRoute from './route/user.route.js';
 import authRoute from "./route/auth.route.js";
 import cors from "cors";
-
+import cookieParser from "cookie-parser";
 
 const app = express();
 dotenv.config();
@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO).then(()=>{
 }).catch((error) => {
     console.error("Database connection error:", error);
 });
-
+app.use(cookieParser());
 app.use("/api/user",userRoute);
 app.use("/api/auth",authRoute);
 
