@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import OAuth from '../Component/OAuth';
-function Signup() {
 
+function Signup() {
+  const navigate = useNavigate();
   const [formdata , setformdata] = useState({});
   const [error1 , seterror1] = useState(false);
   const [loading , setloading] = useState(false);
@@ -17,13 +18,14 @@ const handleSubmit= async (e)=>{
       setloading(true);
       seterror1(false);
       const response = await axios.post('/api/auth/signup', formdata);
-      console.log('Signup successful:', response.data);
+      // console.log('Signup successful:', response.data);
       // const data = await res.json();
       setloading(false);
       if(response.success == false){
         seterror1(true);
         return;
       }
+      navigate('/sign-in');
     } catch (error) {
       console.error('There was an error signing up:', error);
       seterror1(true);
