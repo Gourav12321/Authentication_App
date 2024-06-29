@@ -33,8 +33,7 @@
 <h3>Installation</h3>
 <ol>
     <li>Clone the repository:
-        <pre><code>git clone https://github.com/yourusername/authentication-app.git
-cd authentication-app</code></pre>
+        <pre><code>git clone https://github.com/Gourav12321/Authentication_App.git</code></pre>
     </li>
     <li>Install dependencies:
         <pre><code>npm install
