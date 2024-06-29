@@ -15,7 +15,16 @@ export const signup = async (req, res, next) => {
   });
   try {
     await newUser.save();
-    res.status(201).json({ message: "User Created sucessfully!" });
+    // res.status(201).json();
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+    const { password1: hashedpassword, ...other } = newUser._doc;
+
+    const expirydate = new Date(Date.now() + 3600000);
+    res
+      .cookie("access_token", token, { httpOnly: true, expires: expirydate })
+      .status(200)
+      .json(other);
+      // console.log(other);
   } catch (error) {
     next(error);
   }
@@ -90,6 +99,4 @@ export const google = async (req, res, next) => {
   }
 };
 
-export const signout = async (req , res) =>{
-  res.clearCookie('access_token').status(200).json({message : 'signout successfully'});
-}
+

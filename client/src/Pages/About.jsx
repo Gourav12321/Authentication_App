@@ -2,7 +2,12 @@ import React from 'react';
 
 function About() {
   return (
-    <div className="container mx-auto p-6">
+    <div className="w-full h-full bg-[#1E40A8] ">
+      
+    <div className="container p-[3rem] md:p-[7rem]  pt-[7rem] bg-[#1E40A8] text-white flex flex-col">
+    <div className='w-[23rem] h-[23rem] rounded-full bg-[#2d60fa] flex fixed left-[-10rem] top-[-10rem] '></div>
+    <div className='w-[23rem] h-[23rem] rounded-full bg-[#2d60fa] flex fixed right-[-10rem] bottom-[-15rem] '></div>
+    <div className='w-full h-full z-10'>
       <h1 className="text-4xl font-bold text-center mb-6">About Our Auth App</h1>
       <p className="text-lg mb-6">
         In a world where digital security is paramount, our Auth App emerged as a beacon of reliability and innovation. Our mission is to provide top-tier authentication solutions that safeguard your digital presence while offering a user-friendly experience.
@@ -40,6 +45,9 @@ function About() {
       <p className="text-lg">
         We love hearing from our users and are always here to help. If you have any questions, feedback, or need assistance, please reach out to us. Together, we can build a safer digital future.
       </p>
+      </div>
+    </div>
+   
     </div>
   );
 }

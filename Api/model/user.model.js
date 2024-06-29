@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     },
     profile :{
         type : String,
-        default: "https://www.pikpng.com/pngl/m/16-168770_user-iconset-no-profile-picture-icon-circle-clipart.png",
+        default: "https://t3.ftcdn.net/jpg/05/87/76/66/360_F_587766653_PkBNyGx7mQh9l1XXPtCAq1lBgOsLl6xH.jpg",
     }
 } , {timestamps : true});
 

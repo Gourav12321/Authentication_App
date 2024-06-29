@@ -2,7 +2,11 @@ import React from 'react';
 
 function Home() {
   return (
-    <div className="container mx-auto p-6">
+    <div className="w-full h-full bg-[#1E40A8] ">
+    <div className="container w-full pt-[10rem] p-[3rem] md:pt-[7rem] md:p-[7rem] bg-[#1E40A8]  text-white flex flex-col">
+    <div className='w-[23rem] h-[23rem] rounded-full bg-[#2d60fa] flex fixed left-[-10rem] top-[-10rem] '></div>
+    <div className='w-[23rem] h-[23rem] rounded-full bg-[#2d60fa] flex fixed right-[-10rem] bottom-[-15rem] '></div>
+      <div className='w-full h-full z-10'>
       <h1 className="text-4xl font-bold text-center mb-6">Welcome to Our Auth App</h1>
       <p className="text-lg mb-6">
         Welcome to our innovative Auth App, the premier solution for secure and efficient authentication. In today’s digital age, safeguarding your online identity and sensitive information has never been more crucial. Our Auth App is designed to provide you with top-notch security features, ensuring your data remains protected while offering a seamless user experience.
@@ -46,6 +50,8 @@ function Home() {
       <p className="text-lg">
         We value your feedback and are here to assist you. If you have any questions, suggestions, or need support, please do not hesitate to contact us. Your satisfaction is our priority.
       </p>
+      </div>
+    </div>
     </div>
   );
 }

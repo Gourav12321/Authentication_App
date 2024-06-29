@@ -8,7 +8,7 @@ import {
 } from "../Redux/slice/user.slice";
 import { useDispatch, useSelector } from "react-redux";
 import OAuth from "../Component/OAuth";
-
+import Swal from 'sweetalert2'
 function Signin() {
   const [formdata, setFormdata] = useState({});
   const { loading, error } = useSelector((state) => state.user);
@@ -27,10 +27,25 @@ function Signin() {
 
       if (res.success === false) {
         dispatch(signInFaliure(res));
-        console.log(res);
+        // console.log(res);
         return;
       }
-      dispatch(signInSuccess(res));
+      dispatch(signInSuccess(res.data));
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Signed in successfully"
+      });
       navigate("/");
     } catch (error) {
       dispatch(signInFaliure(error));
@@ -38,8 +53,9 @@ function Signin() {
   };
 
   return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Sign In </h1>
+    <div className="p-3 max-w-lg mx-auto bg-[#1E40A8] rounded-b-[80px] rounded-t-2xl">
+      <h1 className="text-3xl text-center font-semibold my-5 text-white">Login </h1>
+      <h3 className="text-center my-3 text-white">Please Enter Email id and Password</h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"
@@ -57,18 +73,18 @@ function Signin() {
         />
         <button
           disabled={loading}
-          className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+          className="bg-[#1E40A8] text-[#03E639] font-bold border-[#03E639] border-[3px] p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
         >
           {loading ? "Loading" : "Sign In"}
         </button>
         <OAuth />
       </form>
-      <div className="flex gap-2 px-2 py-5">
+      {/* <div className="flex gap-2 px-2 py-5 text-white">
         <p>Don't Have an account?</p>
         <Link to="/sign-up">
-          <span className="text-blue-500">Sign up </span>
+          <span className="text-[#03E639]">Sign up </span>
         </Link>
-      </div>
+      </div> */}
       <p className="text-red-700 mt-5">
         {" "}
         {error ? error.message || "Something Went Wrong" : ""}

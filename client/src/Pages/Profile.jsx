@@ -17,7 +17,7 @@ import {
   updateUserStart,
   updateUserSuccess,
 } from "../Redux/slice/user.slice.js";
-
+import Swal from 'sweetalert2'
 function Profile() {
   const dispatch = useDispatch();
   const fileRef = useRef(null);
@@ -49,8 +49,24 @@ function Profile() {
         dispatch(updateUserFailure(response.data));
         return;
       }
+
       dispatch(updateUserSuccess(response.data));
-      console.log(response.data);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Updated successfully"
+      });
+    
     } catch (error) {
       dispatch(updateUserFailure(error));
     }
@@ -68,6 +84,7 @@ function Profile() {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setPercent(Math.round(progress));
+        
       },
       (error) => {
         setImgError(true);
@@ -76,8 +93,17 @@ function Profile() {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
           setFormData({ ...formData, profile: downloadUrl });
         });
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your File is Uploaded Successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
+      
     );
+   
   };
 
   const handleDelete = async () =>{
@@ -88,23 +114,64 @@ function Profile() {
         dispatch(deleteUserFailure(res));
         return;
       }
-      dispatch(deleteUserSuccess(res));
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Your Account Would be deleted!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your Account has been deleted.",
+            icon: "success"
+          });
+          dispatch(deleteUserSuccess(res));
+        }
+      });
+      
+      
     }catch(error){
       dispatch(deleteUserFailure(error));
     }
   };
-  const handlesignout =async()=>{
-    try{
-      await fetch('/api/auth/signout');
-      dispatch(signOut());
-    }catch(error){
-      console.log(error);
+  const handleSignOut = async () => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You want to be Signed Out",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Sign Out!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Sign Out!",
+            
+            icon: "success"
+          });
+          dispatch(signOut());
+        }
+      });
+      
+    } catch (error) {
+      console.error('Error signing out:', error);
     }
-  }
+  };
   return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+    <div className="w-full h-[100vh] bg-[#1E40A8] z-10">
+        <div className='w-[23rem] h-[23rem] rounded-full bg-[#2d60fa] flex fixed left-[-10rem] top-[-10rem] '></div>
+        <div className='w-[23rem] h-[23rem] rounded-full bg-[#2d60fa] flex fixed right-[-10rem] bottom-[-15rem] '></div>
+       <div className="w-full h-full">
+      
+    <div className="pt-[5rem] p-3 max-w-lg mx-auto bg-[#1E40A8]  z-10  ">
+      <h1 className="text-3xl font-semibold text-center my-7 text-white">Profile</h1>
+      <form className="flex flex-col gap-4 z-10" onSubmit={handleSubmit}>
         <input
           type="file"
           ref={fileRef}
@@ -154,15 +221,17 @@ function Profile() {
         />
         <button
           type="submit"
-          className="bg-slate-700 text-white p-3 rounded-lg uppercase"
+          className="bg-[#1E40A8] text-[#03E639] font-bold border-[#03E639] border-[3px] p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 z-10"
         >
           Update
         </button>
       </form>
       <div className="flex justify-between mt-5">
-        <span className="text-red-700 cursor-pointer" onClick={handleDelete}>Delete Account</span>
-        <span className="text-red-700 cursor-pointer" onClick={handlesignout}>Sign Out</span>
+        <span className="text-red-700 cursor-pointer font-bold text-xl" onClick={handleDelete}>Delete Account</span>
+        <span className="text-red-700 cursor-pointer font-bold text-xl z-10" onClick={handleSignOut}>Sign Out</span>
       </div>
+      </div>
+    </div>
     </div>
   );
 }

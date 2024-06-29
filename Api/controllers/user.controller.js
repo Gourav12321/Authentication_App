@@ -4,9 +4,7 @@ import User from "../model/user.model.js";
 
 // Test endpoint
 export const test = (req, res) => {
-    res.json({
-        message: 'API is working',
-    });
+  return res.json(`${console.log("hello")}`);
 };
 
 // Update user endpoint
@@ -52,7 +50,7 @@ export const deleteUser = async (req , res ,next) =>{
         return next(errorHandleer(401 , "You can only delete your account"));
     }
     try{
-        await User.findOneAndDelete(req.params.id);
+        await User.findOneAndDelete(req.user.id);
         res.status(200).json("User has been deleted");
     }catch(error){
         next(error);

@@ -3,11 +3,11 @@ import './App.css'
 import {BrowserRouter ,Route,Routes} from 'react-router-dom'
 import Home from './Pages/Home'
 import About from './Pages/About'
-import Signin from './Pages/Signin'
-import Signup from './Pages/Signup'
+
 import Profile from './Pages/Profile'
 import Header from './Component/Header'
 import PrivateRoute from './Component/PrivateRoute'
+import Profile2 from './Pages/Profile2'
 
 function App() {
   return (
@@ -16,10 +16,11 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/> } />
         <Route path='/about' element={<About/> } />
-        <Route path='/sign-in' element={<Signin/> } />
-        <Route path='/sign-up' element={<Signup/> } />
+        <Route path='/authentication' element={<Profile2/>}/>
+        
         <Route element={<PrivateRoute/>}>
         <Route path='/profile' element={<Profile/> } />
+        
         </Route>
       </Routes>
     </BrowserRouter>
