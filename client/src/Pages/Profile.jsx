@@ -164,13 +164,13 @@ function Profile() {
     }
   };
   return (
-    <div className="w-full h-[100vh] bg-[#1E40A8] z-10">
+    <div className="w-full h-[100vh] bg-[#1E40A8]">
         <div className='w-[23rem] h-[23rem] rounded-full bg-[#2d60fa] flex fixed left-[-10rem] top-[-10rem] '></div>
         <div className='w-[23rem] h-[23rem] rounded-full bg-[#2d60fa] flex fixed right-[-10rem] bottom-[-15rem] '></div>
        <div className="w-full h-full">
       
-    <div className="pt-[5rem] p-3 max-w-lg mx-auto bg-[#1E40A8]  z-10  ">
-      <h1 className="text-3xl font-semibold text-center my-7 text-white">Profile</h1>
+    <div className="pt-[5rem] p-3 max-w-lg mx-auto bg-[#1E40A8] flex flex-col  z-10  ">
+      <h1 className="text-3xl font-semibold text-center my-7 text-white z-10">Profile</h1>
       <form className="flex flex-col gap-4 z-10" onSubmit={handleSubmit}>
         <input
           type="file"
@@ -227,7 +227,7 @@ function Profile() {
         </button>
       </form>
       <div className="flex justify-between mt-5">
-        <span className="text-red-700 cursor-pointer font-bold text-xl" onClick={handleDelete}>Delete Account</span>
+        <span className="text-red-700 cursor-pointer font-bold text-xl z-10" onClick={handleDelete}>Delete Account</span>
         <span className="text-red-700 cursor-pointer font-bold text-xl z-10" onClick={handleSignOut}>Sign Out</span>
       </div>
       </div>
