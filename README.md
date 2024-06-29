@@ -42,10 +42,10 @@ npm install
 cd ..</code></pre>
     </li>
     <li>Create a <code>.env</code> file in the root directory with the following environment variables:
-        <pre><code>MONGO_URI=your_mongo_db_connection_string
+        <pre><code>MONGO=your_mongo_db_connection_string
 JWT_SECRET=your_jwt_secret
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret</code></pre>
+VITE_FIREBASE_ID=your_vite_firebase_id
+</code></pre>
     </li>
     <li>Run the development server:
         <pre><code>npm run dev</code></pre>
@@ -59,7 +59,7 @@ npm start</code></pre>
 
 <h2>Usage</h2>
 <ul>
-    <li>Navigate to <code>http://localhost:3000</code> to access the application.</li>
+    <li>Navigate to <code>http://localhost:5173</code> to access the application.</li>
     <li>Register a new user or log in with an existing account.</li>
     <li>Use Google OAuth for third-party login.</li>
 </ul>
@@ -93,13 +93,6 @@ npm start</code></pre>
 ├── package.json
 └── README.md</code></pre>
 
-<h2>Future Enhancements</h2>
-<ul>
-    <li>🛡️ Role-Based Access Control</li>
-    <li>📧 Email Verification</li>
-    <li>🔄 Password Reset Functionality</li>
-    <li>🎨 Enhanced UI/UX with responsive design</li>
-</ul>
 
 <h2>Contributing</h2>
 <p>Contributions are welcome! Please open an issue or submit a pull request.</p>
@@ -112,8 +105,8 @@ npm start</code></pre>
 
 <h2>Contact</h2>
 <ul>
-    <li><a href="https://www.linkedin.com/in/yourprofile/">Your LinkedIn</a></li>
-    <li><a href="https://github.com/yourusername">Your GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/gourav-maurya-1b516a303/">Your LinkedIn</a></li>
+    <li><a href="https://github.com/Gourav12321/Gourav12321">Your GitHub</a></li>
 </ul>
 
 </body>
