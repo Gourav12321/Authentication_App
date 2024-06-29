@@ -11,7 +11,7 @@
 
 <h2>Overview</h2>
 <p>Welcome to my secure authentication application, built using the MERN stack (MongoDB, Express.js, React, Node.js) and JWT for robust authentication. This project includes user registration and login, password hashing, session management, and Google OAuth integration.</p>
-<a href="https://authentication-app-jlsh.onrender.com/">Authentication App</a>
+<a href="https://authentication-app-jlsh.onrender.com/">https://authentication-app-jlsh.onrender.com/</a>
 <h2>Features</h2>
 <ul>
     <li>🔒 Secure User Authentication with hashed passwords</li>
